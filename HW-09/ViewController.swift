@@ -14,12 +14,17 @@ class UsernameContainer {
         self.username = username
     }
 }
+class Manager {
+    static let shared = Manager()
+    var username: String = ""
 
+    private init() {}  // Private initializer for singleton
+}
 
 class ViewController: UIViewController {
 
     var label = UILabel()
-     var usernameContainer = UsernameContainer(username: "")
+     var usernameContainer = Manager.shared.username
 
 
     override func viewDidLoad() {
@@ -31,7 +36,7 @@ class ViewController: UIViewController {
     }
 
     func setupLabel() {
-       label.text = "Hello \(usernameContainer.username)"
+        label.text = "Hello \(Manager.shared.username)"
         label.textColor = .black
         label.font = UIFont.systemFont(ofSize: 16)
         label.textAlignment = .center
@@ -52,7 +57,7 @@ class ViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        label.text = "Hi, \(usernameContainer.username)"
+        label.text = "Hi, \(Manager.shared.username)"
         
     }
 
@@ -71,12 +76,7 @@ class ViewController: UIViewController {
             return
         }
 
-        viewController.usernameContainer = usernameContainer
-        viewController.onComplete = { [weak self] updatedUsername in
-                    guard let self = self else { return }
-                    self.usernameContainer.username = updatedUsername
-                    print(usernameContainer.username)
-                }
+       
         vc1.title = "firs"
         vc2.title = "secod"
         viewController.title = "secod"

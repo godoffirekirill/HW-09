@@ -15,7 +15,7 @@ class SecondViewController: UIViewController {
         setupTextField()
         setupButton()
         textField.delegate = self
-        textField.text = usernameContainer?.username ?? ""
+        textField.text = Manager.shared.username
         
     }
     
@@ -81,7 +81,7 @@ extension SecondViewController: UITextFieldDelegate {
         // Optionally handle any logic after text editing finishes
         textField.text = "\(textField.text ?? "")"
         print("User entered: \(textField.text ?? "")")
-        usernameContainer?.username = textField.text ?? ""
+        Manager.shared.username = textField.text ?? ""
         
 
     }
